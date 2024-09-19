@@ -741,12 +741,16 @@ choco install -y vcredist140 netfx-4.8 openjdk17 python git winrar 7zip wireshar
 Remove-Item -Path "$env:USERPROFILE\Desktop\*" -Recurse -Force
 Remove-Item -Path "C:\Users\Public\Desktop\*" -Recurse -Force
 
+New-Item -Path "$ENV:LOCALAPPDATA\BlackMega-Files" -ItemType Directory -Force
+
 ## Install Chrome Browser
 (New-Object System.Net.WebClient).DownloadFile("https://dl.google.com/chrome/install/375.126/chrome_installer.exe", "$ENV:USERPROFILE\Downloads\chrome_installer.exe")
 . $ENV:USERPROFILE\Downloads\chrome_installer.exe /install
 
 ## Apply wireshark profile for analysis
-(New-Object System.Net.WebClient).DownloadFile("https://github.com/")
+(New-Object System.Net.WebClient).DownloadFile("https://github.com/r0ttenbeef/BlackMega-OS/raw/refs/heads/main/WiresharkProfile/wireshark_profile.zip", "$ENV:LOCALAPPDATA\BlackMega-Files\wireshark_profile.zip")
+(New-Object System.Net.WebClient).DownloadFile("https://github.com/r0ttenbeef/BlackMega-OS/raw/refs/heads/main/WiresharkProfile/recent_common", "$ENV:APPDATA\Wireshark\recent_common")
+Expand-Archive "$ENV:LOCALAPPDATA\BlackMega-Files\wireshark_profile.zip" -DestinationPath "$ENV:APPDATA\Wireshark\profiles"
 
 ## Enable Powershell Transcript
 New-Item -Path "HKLM:\Software\Policies\Microsoft\Windows\PowerShell\Transcription" -Force
@@ -833,7 +837,6 @@ foreach($exePath in $DesktopShortcuts.Keys) {
 }
 
 ## Change wallpaper and theme
-New-Item -Path "$ENV:LOCALAPPDATA\BlackMega-Files" -ItemType Directory -Force
 (New-Object System.Net.WebClient).DownloadFile("https://github.com/r0ttenbeef/BlackMega-OS/raw/main/ThemesFiles/BlackMega-OS.theme", "$ENV:LOCALAPPDATA\BlackMega-Files\BlackMega-OS.theme")
 (New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/r0ttenbeef/BlackMega-OS/main/ThemesFiles/WBM-Wallpaper.jpg", "$ENV:LOCALAPPDATA\BlackMega-Files\WBM-Wallpaper.jpg")
 . $ENV:LOCALAPPDATA\BlackMega-Files\BlackMega-OS.theme
